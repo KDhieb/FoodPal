@@ -1,8 +1,8 @@
 # FoodPal
 
-## A daily meal and calorie tracker
+## A Daily Meal and Calorie Tracker
 
-**What this application does:**
+####**What this application does**
 
 This application allows users to track the food they consume 
 on a daily basis to monitor their dietary and nutritional habits. 
@@ -12,7 +12,7 @@ the calories and ingredients of each meal*, and can *display the
 total daily calories* consumed. You may also refer back
 to past days and *view previous entries*.
 
-**Who should use this application:**
+####**Who should use this application**
 
 
 This application is directed towards health conscious individuals
@@ -23,7 +23,7 @@ gain control on how many calories you consume every day. People who
 also want to track recipe ingredients can use this application
 as a way to store that information.
 
-**Why this project is of interest to me:**
+####**Why this project is of interest to me**
 
 Being a health conscious person myself, I appreciate software solutions
 that aim to facilitate healthier lifestyle choices. Given that I have used 
@@ -32,9 +32,15 @@ platform. Also, by being familiar with health applications,
 I believe that I am in a good position to add my own value and differentiation
 to this kind of solution.
 
-**Some of the main features of this application can include:**
+####**Some of the features of this application can include:**
 - Track daily meals eaten and their ingredients
 - Track calories per meal
 - View daily calories consumed
 - View and display current and previous days
 - View and add previously stored meals
+
+##**User Stories**
+- As a user, I want to be able to add a meal to my daily diary
+- As a user, I want to be able to view the list of meals in my collection
+- As a user, I want to be able to select a meal and view its ingredients and calories
+- As a user, I want to be able to view my daily calories consumed
