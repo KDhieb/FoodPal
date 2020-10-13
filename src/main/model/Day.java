@@ -7,7 +7,7 @@ import java.util.List;
 public class Day {
     private final String fullDate;
     private final List<Meal> todayMealLog;
-    private final MealDatabase mealDatabase;
+    private final MealDatabase mdbObject;
 
     private int totalCalories;
 
@@ -24,7 +24,7 @@ public class Day {
 
         this.todayMealLog = new ArrayList<>();
         this.totalCalories = 0;
-        this.mealDatabase = new MealDatabase();
+        this.mdbObject = new MealDatabase();
     }
 
     // MODIFIES: this, MealDatabase
@@ -32,7 +32,7 @@ public class Day {
     //          updates total calories
     public void addMealToLog(Meal meal) {
         this.todayMealLog.add(meal);
-        mealDatabase.storeEntry(meal);
+        mdbObject.storeEntry(meal);
         totalCalories += meal.getCals();
     }
 
@@ -50,12 +50,17 @@ public class Day {
         }
     }
 
+    // EFFECTS: returns true if meal log is empty, false otherwise
+    public Boolean isLogEmpty() {
+        return todayMealLog.isEmpty();
+    }
+
     public List<Meal> getMealLog() {
         return todayMealLog;
     }
 
     public MealDatabase getMealDatabaseObject() {
-        return mealDatabase;
+        return mdbObject;
     }
 
     public int getTotalCalories() {
@@ -65,5 +70,6 @@ public class Day {
     public String getFullDate() {
         return fullDate;
     }
+
 
 }

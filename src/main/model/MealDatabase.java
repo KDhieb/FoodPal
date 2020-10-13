@@ -30,7 +30,13 @@ public class MealDatabase {
         return mealDatabase.get(index);
     }
 
+    // EFFECTS: returns true if database is empty, false otherwise
+    public Boolean isDatabaseEmpty() {
+        return mealDatabase.isEmpty();
+    }
+
     public List<Meal> getMealDatabase() {
         return mealDatabase;
     }
+
 }

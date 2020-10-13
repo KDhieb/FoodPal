@@ -50,4 +50,10 @@ public class MealDatabaseTest {
         assertEquals(mealTwo.getName(), getMealTwo.getName());
     }
 
+    @Test
+    public void testIsDatabaseEmpty() {
+        assertTrue(mdbObject.isDatabaseEmpty());
+        today.addMealToLog(mealOne);
+        assertFalse(mdbObject.isDatabaseEmpty());
+    }
 }

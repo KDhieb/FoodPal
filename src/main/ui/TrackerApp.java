@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class TrackerApp {
     private Day today;
     private List<Meal> log;
-    private MealDatabase dbObject;
+    private MealDatabase mdbObject;
     private List<Meal> mealDB;
     private Scanner input;
 
@@ -27,7 +27,7 @@ public class TrackerApp {
     // EFFECTS: initializes day log and allows for user input
     private void runTracker() {
         boolean appRunning = true;
-        String command = null;
+        String command;
 
         initializeLog();
 
@@ -48,20 +48,28 @@ public class TrackerApp {
     // MODIFIES: this
     // EFFECTS: processes user inputs in main menu
     private void processCommand(String command) {
-        if (command.equals("new")) {
-            doNewMeal();
-        } else if (command.equals("add")) {
-            doAddMealFromDatabase();
-        } else if (command.equals("del")) {
-            doDeleteMeal();
-        } else if (command.equals("cals")) {
-            doViewCals();
-        } else if (command.equals("log")) {
-            doViewMealLog();
-        } else if (command.equals("view")) {
-            doViewMealInDatabase();
-        } else {
-            System.out.println("Invalid Selection. Please try again.");
+        switch (command) {
+            case "new":
+                doNewMeal();
+                break;
+            case "add":
+                doAddMealFromDatabase();
+                break;
+            case "del":
+                doDeleteMeal();
+                break;
+            case "cals":
+                doViewCals();
+                break;
+            case "log":
+                doViewMealLog();
+                break;
+            case "view":
+                doViewMealInDatabase();
+                break;
+            default:
+                System.out.println("Invalid Selection. Please try again.");
+                break;
         }
     }
 
@@ -69,11 +77,11 @@ public class TrackerApp {
     // EFFECTS: displays main menu
     private void displayMenu() {
         System.out.println("\nWelcome to FoodPal! Please choose an option:");
-        System.out.println("\tnew -> create new meal");
-        System.out.println("\tadd -> add meal from database");
-        System.out.println("\tdel -> delete a meal entry");
+        System.out.println("\t new -> create new meal");
+        System.out.println("\t add -> add meal from database");
+        System.out.println("\t del -> delete a meal entry");
         System.out.println("\tcals -> view total calories");
-        System.out.println("\tlog -> view today's food log");
+        System.out.println("\t log -> view today's food log");
         System.out.println("\tview -> view a meal");
         System.out.println("\tquit -> quit");
     }
@@ -83,8 +91,8 @@ public class TrackerApp {
     public void initializeLog() {
         today = new Day();
         log = today.getMealLog();
-        dbObject = today.getMealDatabaseObject();
-        mealDB = dbObject.getMealDatabase();
+        mdbObject = today.getMealDatabaseObject();
+        mealDB = mdbObject.getMealDatabase();
 
         input = new Scanner(System.in);
     }
@@ -111,7 +119,7 @@ public class TrackerApp {
     // MODIFIES: this
     // EFFECTS: allows user to add multiple ingredients to a new meal
     public void enterIngredients(Meal meal) {
-        Boolean addingIngredients = true;
+        boolean addingIngredients = true;
 
         while (addingIngredients) {
             String ingredient = input.next();
@@ -147,14 +155,15 @@ public class TrackerApp {
     // MODIFIES: this
     // EFFECTS: remove a meal from meal log and updates calories
     private void doDeleteMeal() {
-        System.out.println("Select a meal to remove by typing its number:");
-        Meal meal = selectMeal(log);
-        today.removeMealFromLog(meal);
-        //int index = log.indexOf(meal);
-        //today.removeMealFromLogWithIndex(index);
-        System.out.println(meal.getName() + " has been removed from your log!");
+        if (today.isLogEmpty()) {
+            System.out.println("There are no meals in your log to delete!");
+        } else {
+            System.out.println("Select a meal to remove by typing its number:");
+            Meal meal = selectMeal(log);
+            today.removeMealFromLog(meal);
+            System.out.println(meal.getName() + " has been removed from your log!");
+        }
     }
-
 
     // EFFECTS: displays total calories consumed
     public void doViewCals() {
@@ -192,9 +201,13 @@ public class TrackerApp {
     // REQUIRES: meal database must not be empty
     // EFFECTS: searches database and displays a user selected meal's information
     public void doViewMealInDatabase() {
-        System.out.println("Select a meal from the database:");
-        Meal meal = selectMeal(mealDB);
-        System.out.println("Meal Details:");
-        printMealInfo(meal);
+        if (mdbObject.isDatabaseEmpty()) {
+            System.out.println("There are no meals in your database yet! Add a meal first!");
+        } else {
+            System.out.println("Select a meal from the database:");
+            Meal meal = selectMeal(mealDB);
+            System.out.println("Meal Details:");
+            printMealInfo(meal);
+        }
     }
 }

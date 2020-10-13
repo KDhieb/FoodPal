@@ -160,7 +160,21 @@ public class DayTest {
         assertEquals(calorieBalance, logCalories);
     }
 
+    @Test
+    public void testIsLogEmpty() {
+        assertTrue(today.isLogEmpty());
+        assertEquals(0, log.size());
 
+        today.addMealToLog(mealOne);
+
+        assertFalse(today.isLogEmpty());
+        assertEquals(1, log.size());
+
+        assertTrue(today.removeMealFromLog(mealOne));
+
+        assertTrue(today.isLogEmpty());
+        assertEquals(0, log.size());
+    }
 
     @Test
     public void testGetFullDate() {
@@ -175,6 +189,7 @@ public class DayTest {
         assertTrue(isMonthFormatCorrect(month));
         assertTrue(isDayNumberFormatCorrect(dayNumber));
     }
+
 
 
     // MODIFIES: this
