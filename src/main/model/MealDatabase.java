@@ -3,12 +3,11 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+// Represents the collection of all meals created and stored for future use
 public class MealDatabase {
     private List<Meal> mealDatabase;
 
-    /*
-     * EFFECTS: creates meal database to store and retrieve meals
-     */
+     //EFFECTS: creates meal database to store and retrieve meals
     public MealDatabase() {
         this.mealDatabase = new ArrayList<>();
     }

@@ -4,18 +4,17 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Day {
+// Represents a single log with the day's date, meal entries list, and total calories eaten
+public class Log {
     private final String fullDate;
     private final List<Meal> todayMealLog;
     private final MealDatabase mdbObject;
 
     private int totalCalories;
 
-    /*
-     EFFECTS: creates today's meal log with current date
-              initializes meal database and tracks calories
-     */
-    public Day() {
+    //EFFECTS: creates today's meal log with current date
+    //         initializes meal database and tracks calories
+    public Log() {
         LocalDateTime date = LocalDateTime.now();
         String month = date.getMonth().name();
         String dayOfWeek = date.getDayOfWeek().name();

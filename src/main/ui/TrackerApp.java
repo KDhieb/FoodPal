@@ -1,23 +1,22 @@
 package ui;
 
 
-import model.Day;
+import model.Log;
 import model.MealDatabase;
 import model.Meal;
 
 import java.util.List;
 import java.util.Scanner;
 
+// Represents the user interface console
 public class TrackerApp {
-    private Day today;
+    private Log today;
     private List<Meal> log;
     private MealDatabase mdbObject;
     private List<Meal> mealDB;
     private Scanner input;
 
-    /*
-     * EFFECTS: begins the ui console
-     */
+    //EFFECTS: begins the ui console
     public TrackerApp() {
         runTracker();
     }
@@ -89,7 +88,7 @@ public class TrackerApp {
     // MODIFIES: this
     // EFFECTS: initializes main objects
     public void initializeLog() {
-        today = new Day();
+        today = new Log();
         log = today.getMealLog();
         mdbObject = today.getMealDatabaseObject();
         mealDB = mdbObject.getMealDatabase();

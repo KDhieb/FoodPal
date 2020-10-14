@@ -9,8 +9,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DayTest {
-    Day today;
+public class LogTest {
+    Log today;
     Meal mealOne;
     Meal mealTwo;
     int mealOneCalories;
@@ -21,7 +21,7 @@ public class DayTest {
 
     @BeforeEach
     public void runBefore() {
-        today = new Day();
+        today = new Log();
         mealOne = new Meal("Burrito", 350);
         mealTwo = new Meal("Salad", 200);
         mealOneCalories = mealOne.getCals();

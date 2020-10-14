@@ -8,14 +8,14 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MealDatabaseTest {
-    Day today;
+    Log today;
     MealDatabase mdbObject;
     Meal mealOne;
     Meal mealTwo;
 
     @BeforeEach
     public void runBefore() {
-        today = new Day();
+        today = new Log();
         mdbObject = today.getMealDatabaseObject();
         mealOne = new Meal("Burrito", 350);
         mealTwo = new Meal("Salad", 200);
