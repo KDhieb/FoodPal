@@ -41,6 +41,6 @@ to this kind of solution.
 
 ##**User Stories**
 - As a user, I want to be able to add a meal to my daily diary
-- As a user, I want to be able to view the list of meals in my collection
+- As a user, I want to be able to view the list of all the meals I ate today
 - As a user, I want to be able to select a meal and view its ingredients and calories
-- As a user, I want to be able to view my daily calories consumed
+- As a user, I want to be able to view my total daily calories consumed
