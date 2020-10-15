@@ -81,7 +81,7 @@ public class TrackerApp {
         System.out.println("\t del -> delete a meal entry");
         System.out.println("\tcals -> view total calories");
         System.out.println("\t log -> view today's food log");
-        System.out.println("\tview -> view a meal");
+        System.out.println("\tview -> view a meal in database");
         System.out.println("\tquit -> quit");
     }
 
@@ -96,17 +96,15 @@ public class TrackerApp {
         input = new Scanner(System.in);
     }
 
-    // REQUIRES: meal name cannot include spaces
-    //           calories must be > 0
+    // REQUIRES: calories entered must be >= 0
     // MODIFIES: this
     // EFFECTS: creates a new meal and adds it to today's meal log
     public void doNewMeal() {
         System.out.println("Enter Meal Name:");
-        String name = input.next();
+        input.nextLine();
+        String name = input.nextLine();
         System.out.println("Enter Calories:");
         int cals = input.nextInt();
-        System.out.println("Enter Ingredients, type \"done\" when finished:");
-
         Meal meal = new Meal(name, cals);
         enterIngredients(meal);
         today.addMealToLog(meal);
@@ -114,14 +112,15 @@ public class TrackerApp {
         System.out.println(meal.getName() + " has been created and added to your log!");
     }
 
-    // REQUIRES: ingredients cannot include spaces
     // MODIFIES: this
     // EFFECTS: allows user to add multiple ingredients to a new meal
     public void enterIngredients(Meal meal) {
+        System.out.println("Enter Ingredients, type \"done\" when finished:");
         boolean addingIngredients = true;
 
+        input.nextLine();
         while (addingIngredients) {
-            String ingredient = input.next();
+            String ingredient = input.nextLine();
             if (ingredient.toLowerCase().equals("done")) {
                 addingIngredients = false;
             } else {
@@ -134,15 +133,20 @@ public class TrackerApp {
     // MODIFIES: this
     // EFFECTS: adds a meal from the database to today's meal log and updates calories
     public void doAddMealFromDatabase() {
-        System.out.println("Select a meal to add from the database by typing its number:");
-        Meal meal = selectMeal(mealDB);
-        today.addMealToLog(meal);
-        System.out.println(meal.getName() + " has been added to your log!");
+        if (mdbObject.isDatabaseEmpty()) {
+            System.out.println("Your meal database is empty! Add a meal first.");
+        } else {
+            System.out.println("Select a meal to add from the database by typing its number:");
+            Meal meal = selectMeal(mealDB);
+            today.addMealToLog(meal);
+            System.out.println(meal.getName() + " has been added to your log!");
+        }
     }
 
-    // REQUIRES: meal database must not be empty
+    // REQUIRES: passed meal list must not be empty
     // MODIFIES: this
-    // EFFECTS: displays database meal options and retrieves meal based on user input
+    // EFFECTS: displays meal options from a given meal list
+    //          returns a meal based on user selection
     public Meal selectMeal(List<Meal> mealCollection) {
         for (Meal meal: mealCollection) {
             System.out.println("For " + meal.getName() + " press -> " + mealCollection.indexOf(meal));
@@ -197,7 +201,6 @@ public class TrackerApp {
         System.out.println("Ingredients: " + ingredients);
     }
 
-    // REQUIRES: meal database must not be empty
     // EFFECTS: searches database and displays a user selected meal's information
     public void doViewMealInDatabase() {
         if (mdbObject.isDatabaseEmpty()) {

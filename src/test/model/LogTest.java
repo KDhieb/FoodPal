@@ -127,7 +127,6 @@ public class LogTest {
         calorieBalance -= mealOneCalories;
         updateLogCalories();
         assertEquals(calorieBalance, logCalories);
-
     }
 
     @Test
