@@ -1,0 +1,47 @@
+{
+  "logMeals": [
+    {
+      "name": "Beef Tacos",
+      "cals": 350,
+      "ingredients": ["Beef", "Taco Shell", "Salsa", "Cheese"]
+    },
+    {
+      "name": "Chicken Salad",
+      "cals": 220,
+      "ingredients": ["Chicken", "Lettuce", "Tomato", "Caesar Dressing"]
+    },
+    {
+      "name": "Roasted Salmon",
+      "cals": 400,
+      "ingredients": ["Salmon", "Olive Oil", "Spices", "Baby Tomatoes"]
+    }
+  ],
+  "dbMeals": [
+    {
+      "name": "Beef Tacos",
+      "cals": 350,
+      "ingredients": ["Beef", "Taco Shell", "Salsa", "Cheese"]
+    },
+    {
+      "name": "Chicken Salad",
+      "cals": 220,
+      "ingredients": ["Chicken", "Lettuce", "Tomato", "Caesar Dressing"]
+    },
+    {
+      "name": "Roasted Salmon",
+      "cals": 400,
+      "ingredients": ["Salmon", "Olive Oil", "Spices", "Baby Tomatoes"]
+    },
+    {
+      "name": "Stuffed Peppers",
+      "cals": 360,
+      "ingredients": ["Bell Peppers", "Minced Meat", "Rice", "Tomato Sauce", "Cheese"]
+    },
+    {
+      "name": "Baked Tilapia",
+      "cals": 270,
+      "ingredients": ["Tilapia", "Spices", "Olive oil", "onions", "sundried tomatoes"]
+    }
+  ],
+  "name": "Today's Meal Log"
+}

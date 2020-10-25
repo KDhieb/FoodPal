@@ -1,11 +1,15 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 // Represents a single log with the day's date, meal entries list, and total calories eaten
-public class Log {
+public class Log implements Writable {
     private final String fullDate;
     private final List<Meal> todayMealLog;
     private final MealDatabase mdbObject;
@@ -29,11 +33,25 @@ public class Log {
     // MODIFIES: this, MealDatabase
     // EFFECTS: adds meal to today's log and to meal database if new
     //          updates total calories
+    public void addMealToLogAndDatabase(Meal meal) {
+        addMealToLog(meal);
+        storeMealInDatabase(meal);
+    }
+
+    // MODIFIES: this, MealDatabase
+    // EFFECTS: adds meal to today's log and to meal database if new
+    //          updates total calories
     public void addMealToLog(Meal meal) {
         this.todayMealLog.add(meal);
-        mdbObject.storeEntry(meal);
         totalCalories += meal.getCals();
     }
+
+    // MODIFIES: this, MealDatabase
+    // EFFECTS: adds meal to database only
+    public void storeMealInDatabase(Meal meal) {
+        mdbObject.storeEntry(meal);
+    }
+
 
     // REQUIRES:
     // MODIFIES: this
@@ -70,5 +88,20 @@ public class Log {
         return fullDate;
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("logMeals", mealsToJson(todayMealLog));
+        json.put("dbMeals", mealsToJson(mdbObject.getMealDatabase()));
+        return json;
+    }
 
+    // EFFECTS: returns meals in the given list as a JSON array
+    private JSONArray mealsToJson(List<Meal> mealList) {
+        JSONArray jsonArray = new JSONArray();
+        for (Meal meal :  todayMealLog) {
+            jsonArray.put(meal.toJson());
+        }
+        return jsonArray;
+    }
 }

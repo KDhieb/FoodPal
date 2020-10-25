@@ -1,0 +1,44 @@
+{
+    "dbMeals": [
+        {
+            "name": "Veal Parm",
+            "ingredients": [
+                "veal",
+                "cheese",
+                "tomato sauce",
+                "bread crumbs"
+            ],
+            "cals": 400
+        },
+        {
+            "name": "chicken salad",
+            "ingredients": [
+                "chicken",
+                "lettuce",
+                "ceasar dressing"
+            ],
+            "cals": 200
+        }
+    ],
+    "logMeals": [
+        {
+            "name": "Veal Parm",
+            "ingredients": [
+                "veal",
+                "cheese",
+                "tomato sauce",
+                "bread crumbs"
+            ],
+            "cals": 400
+        },
+        {
+            "name": "chicken salad",
+            "ingredients": [
+                "chicken",
+                "lettuce",
+                "ceasar dressing"
+            ],
+            "cals": 200
+        }
+    ]
+}

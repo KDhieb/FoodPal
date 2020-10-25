@@ -33,7 +33,7 @@ public class LogTest {
 
     @Test
     public void testAddMealToLogOneMeal() {
-        today.addMealToLog(mealOne);
+        today.addMealToLogAndDatabase(mealOne);
         updateLogCalories();
 
         assertEquals(mealOneCalories, logCalories);
@@ -42,8 +42,8 @@ public class LogTest {
 
     @Test
     public void testAddMealToLogTwoDifferentMeal() {
-        today.addMealToLog(mealOne);
-        today.addMealToLog(mealTwo);
+        today.addMealToLogAndDatabase(mealOne);
+        today.addMealToLogAndDatabase(mealTwo);
 
         int calorieBalance = mealOneCalories + mealTwoCalories;
         updateLogCalories();
@@ -54,8 +54,8 @@ public class LogTest {
 
     @Test
     public void testAddMealToLogTwoSameMeals() {
-        today.addMealToLog(mealOne);
-        today.addMealToLog(mealOne);
+        today.addMealToLogAndDatabase(mealOne);
+        today.addMealToLogAndDatabase(mealOne);
 
         calorieBalance = mealOneCalories * 2;
         updateLogCalories();
@@ -65,9 +65,9 @@ public class LogTest {
 
     @Test
     public void testAddMealToLogMealOneTwoOne() {
-        today.addMealToLog(mealOne);
-        today.addMealToLog(mealTwo);
-        today.addMealToLog(mealOne);
+        today.addMealToLogAndDatabase(mealOne);
+        today.addMealToLogAndDatabase(mealTwo);
+        today.addMealToLogAndDatabase(mealOne);
 
         calorieBalance = (mealOneCalories * 2) + mealTwoCalories;
         updateLogCalories();
@@ -82,7 +82,7 @@ public class LogTest {
 
     @Test
     public void testRemoveMealFromLogOneMeal() {
-        today.addMealToLog(mealOne);
+        today.addMealToLogAndDatabase(mealOne);
         updateLogCalories();
         assertEquals(mealOneCalories, logCalories);
         assertTrue(today.removeMealFromLog(mealOne));
@@ -92,8 +92,8 @@ public class LogTest {
 
     @Test
     public void testRemoveMealFromLogTwoDifferentMeals() {
-        today.addMealToLog(mealOne);
-        today.addMealToLog(mealTwo);
+        today.addMealToLogAndDatabase(mealOne);
+        today.addMealToLogAndDatabase(mealTwo);
 
         calorieBalance = mealOneCalories + mealTwoCalories;
         updateLogCalories();
@@ -111,8 +111,8 @@ public class LogTest {
 
     @Test
     public void testRemoveMealFromLogTwoSameMeals() {
-        today.addMealToLog(mealOne);
-        today.addMealToLog(mealOne);
+        today.addMealToLogAndDatabase(mealOne);
+        today.addMealToLogAndDatabase(mealOne);
 
         calorieBalance = mealOneCalories * 2;
         updateLogCalories();
@@ -131,9 +131,9 @@ public class LogTest {
 
     @Test
     public void testRemoveMealFromLogTwoSameMealsOneTwoOne() {
-        today.addMealToLog(mealOne);
-        today.addMealToLog(mealTwo);
-        today.addMealToLog(mealOne);
+        today.addMealToLogAndDatabase(mealOne);
+        today.addMealToLogAndDatabase(mealTwo);
+        today.addMealToLogAndDatabase(mealOne);
 
         assertEquals(3, log.size());
         calorieBalance = (mealOneCalories * 2) + mealTwoCalories;
@@ -164,7 +164,7 @@ public class LogTest {
         assertTrue(today.isLogEmpty());
         assertEquals(0, log.size());
 
-        today.addMealToLog(mealOne);
+        today.addMealToLogAndDatabase(mealOne);
 
         assertFalse(today.isLogEmpty());
         assertEquals(1, log.size());

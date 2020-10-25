@@ -32,7 +32,7 @@ platform. Also, by being familiar with health applications,
 I believe that I am in a good position to add my own value and differentiation
 to this kind of solution.
 
-#### Some of the features of this application can include:
+#### Some features of this application can include:
 - Track daily meals eaten and their ingredients
 - Track calories per meal
 - View daily calories consumed

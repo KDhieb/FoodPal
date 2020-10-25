@@ -53,7 +53,7 @@ public class MealDatabaseTest {
     @Test
     public void testIsDatabaseEmpty() {
         assertTrue(mdbObject.isDatabaseEmpty());
-        today.addMealToLog(mealOne);
+        today.addMealToLogAndDatabase(mealOne);
         assertFalse(mdbObject.isDatabaseEmpty());
     }
 }

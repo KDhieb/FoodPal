@@ -5,23 +5,43 @@ import model.Log;
 import model.MealDatabase;
 import model.Meal;
 
+import persistence.JsonReader;
+import persistence.JsonWriter;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 // Represents the user interface console
 public class TrackerApp {
+    private static final String JSON_STORE = "./data/log.json";
+    private static final String JSON_STORE_TEST = "./data/testReaderFullLog.json";
     private Log today;
     private List<Meal> log;
     private MealDatabase mdbObject;
     private List<Meal> mealDB;
     private Scanner input;
+    private JsonReader jsonReader;
+    private JsonWriter jsonWriter;
 
     //EFFECTS: begins the ui console
     public TrackerApp() {
+        jsonReader = new JsonReader(JSON_STORE);
+        jsonWriter = new JsonWriter(JSON_STORE);
+        today = new Log();
+        log = today.getMealLog();
+        mdbObject = today.getMealDatabaseObject();
+        mealDB = mdbObject.getMealDatabase();
+
+        input = new Scanner(System.in);
+
         runTracker();
     }
 
-    // REQUIRES:
     // MODIFIES: this
     // EFFECTS: initializes day log and allows for user input
     private void runTracker() {
@@ -44,6 +64,7 @@ public class TrackerApp {
         System.out.println("\nHope to see you at your next meal!");
     }
 
+    // TODO : SPLIT COMMAND PROCESSING INTO MULTIPLE METHODS FOR CHECKSTYLE
     // MODIFIES: this
     // EFFECTS: processes user inputs in main menu
     private void processCommand(String command) {
@@ -66,12 +87,17 @@ public class TrackerApp {
             case "view":
                 doViewMealInDatabase();
                 break;
+            case "save":
+                doSaveLog();
+                break;
+            case "load":
+                doLoadLog();
+                break;
             default:
                 System.out.println("Invalid Selection. Please try again.");
                 break;
         }
     }
-
 
     // EFFECTS: displays main menu
     private void displayMenu() {
@@ -82,18 +108,15 @@ public class TrackerApp {
         System.out.println("\tcals -> view total calories");
         System.out.println("\t log -> view today's food log");
         System.out.println("\tview -> view a meal in database");
+        System.out.println("\tsave -> save log to file");
+        System.out.println("\tload -> load a log from file");
         System.out.println("\tquit -> quit");
     }
 
     // MODIFIES: this
     // EFFECTS: initializes main objects
     public void initializeLog() {
-        today = new Log();
-        log = today.getMealLog();
-        mdbObject = today.getMealDatabaseObject();
-        mealDB = mdbObject.getMealDatabase();
-
-        input = new Scanner(System.in);
+        // nothing
     }
 
     // REQUIRES: calories entered must be >= 0
@@ -107,7 +130,7 @@ public class TrackerApp {
         int cals = input.nextInt();
         Meal meal = new Meal(name, cals);
         enterIngredients(meal);
-        today.addMealToLog(meal);
+        today.addMealToLogAndDatabase(meal);
 
         System.out.println(meal.getName() + " has been created and added to your log!");
     }
@@ -138,7 +161,7 @@ public class TrackerApp {
         } else {
             System.out.println("Select a meal to add from the database by typing its number:");
             Meal meal = selectMeal(mealDB);
-            today.addMealToLog(meal);
+            today.addMealToLogAndDatabase(meal);
             System.out.println(meal.getName() + " has been added to your log!");
         }
     }
@@ -210,6 +233,31 @@ public class TrackerApp {
             Meal meal = selectMeal(mealDB);
             System.out.println("Meal Details:");
             printMealInfo(meal);
+        }
+    }
+
+    private void doSaveLog() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(today);
+            jsonWriter.close();
+            System.out.println("Saved log for " + today.getFullDate() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    private void doLoadLog() {
+        try {
+            today = jsonReader.read();
+            log = today.getMealLog();
+            mdbObject = today.getMealDatabaseObject();
+            mealDB = mdbObject.getMealDatabase();
+
+            System.out.println("Log successfully loaded from file!");
+
+        } catch (IOException e) {
+            System.out.println("Unable to read from file " + JSON_STORE);
         }
     }
 }

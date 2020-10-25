@@ -1,10 +1,13 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 // Represents a single meal with a name, calories, and list of ingredients
-public class Meal {
+public class Meal implements Writable {
     private String name;
     private Integer cals;
     private List<String> ingredients;
@@ -34,4 +37,12 @@ public class Meal {
         return this.ingredients;
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("cals", cals);
+        json.put("ingredients", ingredients);
+        return json;
+    }
 }
