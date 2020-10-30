@@ -86,6 +86,7 @@ public class Log implements Writable {
         return fullDate;
     }
 
+    // CITATION: modeled from https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
     // EFFECTS: converts meal data in log and database to JSON object
     @Override
     public JSONObject toJson() {
@@ -96,6 +97,7 @@ public class Log implements Writable {
         return json;
     }
 
+    // CITATION: modeled from https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
     // EFFECTS: returns meals in the given list as a JSON array
     private JSONArray mealsToJson(List<Meal> mealList) {
         JSONArray jsonArray = new JSONArray();

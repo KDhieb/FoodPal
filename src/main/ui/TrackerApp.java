@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
+// aspects of this class have been modeled from https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 // Represents the user interface console
 public class TrackerApp {
     private static final String JSON_STORE = "./data/log.json";
@@ -83,7 +84,6 @@ public class TrackerApp {
             System.out.println("Invalid Selection. Please try again.");
         }
     }
-
 
     // EFFECTS: displays main menu
     private void displayMenu() {
@@ -223,6 +223,7 @@ public class TrackerApp {
         }
     }
 
+    // CITATION: this method has been modeled from https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
     // EFFECTS: saves the current log to file
     private void doSaveLog() {
         try {
@@ -235,6 +236,7 @@ public class TrackerApp {
         }
     }
 
+    // CITATION: this method has been modeled from https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
     // MODIFIES: this
     // EFFECTS: loads log from file
     private void doLoadLog() {

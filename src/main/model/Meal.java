@@ -57,6 +57,7 @@ public class Meal implements Writable {
         return this.ingredients;
     }
 
+    // CITATION: modeled from https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
     // EFFECTS: converts a meal into a JSON object
     @Override
     public JSONObject toJson() {

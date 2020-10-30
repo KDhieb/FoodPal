@@ -31,15 +31,26 @@
             "cals": 400
         }
     ],
-    "logMeals": [{
-        "name": "Philly CheeseSteak",
-        "ingredients": [
-            "CheeseSteak",
-            "Cheese",
-            "Green Peppers",
-            "Onions",
-            "Mayo"
-        ],
-        "cals": 400
-    }]
+    "logMeals": [
+        {
+            "name": "Philly CheeseSteak",
+            "ingredients": [
+                "CheeseSteak",
+                "Cheese",
+                "Green Peppers",
+                "Onions",
+                "Mayo"
+            ],
+            "cals": 400
+        },
+        {
+            "name": "chicken salad",
+            "ingredients": [
+                "chicken",
+                "lettuce",
+                "dressing"
+            ],
+            "cals": 200
+        }
+    ]
 }

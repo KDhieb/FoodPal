@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import java.io.*;
 
+// CITATION: This class has been modeled from https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 // Represents a writer that writes the JSON representation of a log and its stored meals to file
 public class JsonWriter {
     private static final int TAB = 4;

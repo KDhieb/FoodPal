@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 
 import org.json.*;
 
+// CITATION: This class has been modeled from https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 // Represents a reader that can read a saved meal log from JSON data stored in file
 public class JsonReader {
     private String source;
