@@ -73,23 +73,23 @@ public class MealTest {
 
         Meal sameName = new Meal(name, cals + 1);
         Meal sameCals = new Meal(name + "!", cals);
-        Meal sameNameCals = new Meal(name, cals);
+        Meal sameNameAndCals = new Meal(name, cals);
 
         Meal sameIngredient = new Meal(name + "!", cals + 1);
         sameIngredient.addIngredient(ingredient);
 
-        Meal sameNameIngredient = new Meal(name, cals + 1);
-        sameNameIngredient.addIngredient(ingredient);
+        Meal sameNameAndIngredient = new Meal(name, cals + 1);
+        sameNameAndIngredient.addIngredient(ingredient);
 
-        Meal sameCalsIngredient = new Meal(name + "!", cals);
-        sameCalsIngredient.addIngredient(ingredient);
+        Meal sameCalsAndIngredient = new Meal(name + "!", cals);
+        sameCalsAndIngredient.addIngredient(ingredient);
 
         assertFalse(mealOne.equals(sameName));
         assertFalse(mealOne.equals(sameCals));
-        assertFalse(mealOne.equals(sameNameCals));
+        assertFalse(mealOne.equals(sameNameAndCals));
         assertFalse(mealOne.equals(sameIngredient));
-        assertFalse(mealOne.equals(sameNameIngredient));
-        assertFalse(mealOne.equals(sameCalsIngredient));
+        assertFalse(mealOne.equals(sameNameAndIngredient));
+        assertFalse(mealOne.equals(sameCalsAndIngredient));
     }
 
 

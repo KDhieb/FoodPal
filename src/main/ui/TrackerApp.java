@@ -8,11 +8,9 @@ import model.Meal;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -43,7 +41,7 @@ public class TrackerApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: initializes day log and allows for user input
+    // EFFECTS: keeps application running and allows for user input
     private void runTracker() {
         boolean appRunning = true;
         String command;

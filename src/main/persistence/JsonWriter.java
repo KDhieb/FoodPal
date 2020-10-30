@@ -6,7 +6,7 @@ import org.json.JSONObject;
 
 import java.io.*;
 
-// Represents a writer that writes the JSON representation of log and its stored meals to file
+// Represents a writer that writes the JSON representation of a log and its stored meals to file
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;

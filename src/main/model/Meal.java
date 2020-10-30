@@ -57,6 +57,7 @@ public class Meal implements Writable {
         return this.ingredients;
     }
 
+    // EFFECTS: converts a meal into a JSON object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

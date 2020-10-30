@@ -52,8 +52,6 @@ public class Log implements Writable {
         mdbObject.storeEntry(meal);
     }
 
-
-    // REQUIRES:
     // MODIFIES: this
     // EFFECTS: if meal in log, removes it and deducts calories, returns true
     //          returns false if meal not in log

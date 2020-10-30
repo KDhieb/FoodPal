@@ -1,9 +1,5 @@
 package ui;
 
-import model.Meal;
-
-import java.io.FileNotFoundException;
-
 // represents the main program execution class
 public class Main {
 
