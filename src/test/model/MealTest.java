@@ -58,8 +58,11 @@ public class MealTest {
         assertEquals(mealOneCopy, mealOne);
         assertEquals(mealOne, mealOneCopy);
         assertNotEquals(mealTwo, mealOne);
+
         assertNotEquals(mealOne, "Not a Meal Object");
-        assertNotEquals(nullMeal, mealOne);
+        assertNotEquals(mealOne, null);
+        assertNotEquals(mealOne, nullMeal);
+        assertFalse(mealOne.equals(nullMeal));
 
         assertEquals(mealOne.hashCode(), mealOneCopy.hashCode());
     }
