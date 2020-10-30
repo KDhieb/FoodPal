@@ -54,12 +54,12 @@ public class MealTest {
 
         mealTwo.addIngredient("Spicy Sauce");
 
-        assertTrue(mealOne.equals(mealOne));
-        assertTrue(mealOne.equals(mealOneCopy));
-        assertTrue(mealOneCopy.equals(mealOne));
-        assertFalse(mealOne.equals(mealTwo));
-        assertFalse(mealOne.equals("Not a Meal Object"));
-        assertFalse(mealOne.equals(nullMeal));
+        assertEquals(mealOne, mealOne);
+        assertEquals(mealOneCopy, mealOne);
+        assertEquals(mealOne, mealOneCopy);
+        assertNotEquals(mealTwo, mealOne);
+        assertNotEquals(mealOne, "Not a Meal Object");
+        assertNotEquals(nullMeal, mealOne);
 
         assertEquals(mealOne.hashCode(), mealOneCopy.hashCode());
     }
@@ -84,12 +84,12 @@ public class MealTest {
         Meal sameCalsAndIngredient = new Meal(name + "!", cals);
         sameCalsAndIngredient.addIngredient(ingredient);
 
-        assertFalse(mealOne.equals(sameName));
-        assertFalse(mealOne.equals(sameCals));
-        assertFalse(mealOne.equals(sameNameAndCals));
-        assertFalse(mealOne.equals(sameIngredient));
-        assertFalse(mealOne.equals(sameNameAndIngredient));
-        assertFalse(mealOne.equals(sameCalsAndIngredient));
+        assertNotEquals(sameName, mealOne);
+        assertNotEquals(sameCals, mealOne);
+        assertNotEquals(sameNameAndCals, mealOne);
+        assertNotEquals(sameIngredient, mealOne);
+        assertNotEquals(sameNameAndIngredient, mealOne);
+        assertNotEquals(sameCalsAndIngredient, mealOne);
     }
 
 
