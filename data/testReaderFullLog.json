@@ -35,12 +35,12 @@
     {
       "name": "Stuffed Peppers",
       "cals": 360,
-      "ingredients": ["Bell Peppers", "Minced Meat", "Rice", "Tomato Sauce", "Cheese"]
+      "ingredients": ["Bell Peppers", "Minced Meat", "Rice", "Tomato Sauce"]
     },
     {
       "name": "Baked Tilapia",
       "cals": 270,
-      "ingredients": ["Tilapia", "Spices", "Olive oil", "onions", "sundried tomatoes"]
+      "ingredients": ["Tilapia", "Spices", "Olive oil", "onions", "celery"]
     }
   ],
   "name": "Today's Meal Log"

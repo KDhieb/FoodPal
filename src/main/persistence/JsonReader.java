@@ -62,19 +62,6 @@ public class JsonReader {
             log.storeMealInDatabase(meal);
         }
 
-//        System.out.println("FOR MEAL LOG: -------------");
-//        for (Meal meal: log.getMealLog()) {
-//            System.out.println("name: " + meal.getName());
-//            System.out.println("cals: " + meal.getCals());
-//            System.out.println("ingredients: " + meal.getIngredients());
-//        }
-//        System.out.println("FOR DATABASE: -------------");
-//        for (Meal meal: log.getMealDatabaseObject().getMealDatabase()) {
-//            System.out.println("name: " + meal.getName());
-//            System.out.println("cals: " + meal.getCals());
-//            System.out.println("ingredients: " + meal.getIngredients());
-//        }
-
     }
 
     // EFFECTS: parses meal from JSON object and returns it

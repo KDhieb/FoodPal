@@ -1,44 +1,45 @@
 {
+    "date": "FRIDAY OCTOBER 30",
     "dbMeals": [
         {
-            "name": "Veal Parm",
+            "name": "tacos",
             "ingredients": [
-                "veal",
-                "cheese",
-                "tomato sauce",
-                "bread crumbs"
+                "beef",
+                "salsa",
+                "cheese"
             ],
-            "cals": 400
+            "cals": 120
         },
         {
             "name": "chicken salad",
             "ingredients": [
                 "chicken",
                 "lettuce",
-                "ceasar dressing"
+                "dressing"
             ],
             "cals": 200
+        },
+        {
+            "name": "Philly CheeseSteak",
+            "ingredients": [
+                "CheeseSteak",
+                "Cheese",
+                "Green Peppers",
+                "Onions",
+                "Mayo"
+            ],
+            "cals": 400
         }
     ],
-    "logMeals": [
-        {
-            "name": "Veal Parm",
-            "ingredients": [
-                "veal",
-                "cheese",
-                "tomato sauce",
-                "bread crumbs"
-            ],
-            "cals": 400
-        },
-        {
-            "name": "chicken salad",
-            "ingredients": [
-                "chicken",
-                "lettuce",
-                "ceasar dressing"
-            ],
-            "cals": 200
-        }
-    ]
+    "logMeals": [{
+        "name": "Philly CheeseSteak",
+        "ingredients": [
+            "CheeseSteak",
+            "Cheese",
+            "Green Peppers",
+            "Onions",
+            "Mayo"
+        ],
+        "cals": 400
+    }]
 }

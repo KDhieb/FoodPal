@@ -1,5 +1,8 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -189,7 +192,104 @@ public class LogTest {
         assertTrue(isDayNumberFormatCorrect(dayNumber));
     }
 
+//    @Test
+//    public void testToJsonLog() {
+//        addMultipleIngredients(mealOne, "Beef", "Salsa", "Cheese");
+//        addMultipleIngredients(mealTwo, "Lettuce", "Tomatoes", "Blue Cheese");
+//
+//        today.addMealToLogAndDatabase(mealOne);
+//        today.addMealToLogAndDatabase(mealTwo);
+//        JSONObject jsonObj = today.toJson();
+//
+//        JSONArray jsonArrayLog = jsonObj.getJSONArray("logMeals");
+//        JSONObject jsonLogMealOne = jsonArrayLog.getJSONObject(0);
+//        JSONObject jsonLogMealTwo = jsonArrayLog.getJSONObject(1);
+//
+//        JSONArray jsonArrayDb = jsonObj.getJSONArray("dbMeals");
+//        JSONObject jsonDbMealOne = jsonArrayDb.getJSONObject(0);
+//        JSONObject jsonDbMealTwo = jsonArrayDb.getJSONObject(1);
+//
+//        assertEquals(jsonLogMealOne.getString("name"), mealOne.getName());
+//        assertEquals(jsonLogMealTwo.getString("name"), mealTwo.getName());
+//        assertEquals(jsonLogMealOne.getInt("cals"), mealOne.getCals());
+//        assertEquals(jsonLogMealTwo.getInt("cals"), mealTwo.getCals());
+//
+//        JSONArray ingredientsMealOneLog = jsonLogMealOne.getJSONArray("ingredients");
+//        JSONArray ingredientsMealTwoLog = jsonLogMealTwo.getJSONArray("ingredients");
+//        assertTrueJsonIngredientsList(ingredientsMealOneLog, mealOne.getIngredients());
+//        assertTrueJsonIngredientsList(ingredientsMealTwoLog, mealTwo.getIngredients());
+//    }
+//
+//    @Test
+//    public void testToJsonDatabase() {
+//        addMultipleIngredients(mealOne, "Beef", "Salsa", "Cheese");
+//        addMultipleIngredients(mealTwo, "Lettuce", "Tomatoes", "Blue Cheese");
+//
+//        today.addMealToLogAndDatabase(mealOne);
+//        today.addMealToLogAndDatabase(mealTwo);
+//        JSONObject jsonObj = today.toJson();
+//
+//        JSONArray jsonArrayDb = jsonObj.getJSONArray("dbMeals");
+//        JSONObject jsonDbMealOne = jsonArrayDb.getJSONObject(0);
+//        JSONObject jsonDbMealTwo = jsonArrayDb.getJSONObject(1);
+//
+//        assertEquals(jsonDbMealOne.getString("name"), mealOne.getName());
+//        assertEquals(jsonDbMealTwo.getString("name"), mealTwo.getName());
+//        assertEquals(jsonDbMealOne.getInt("cals"), mealOne.getCals());
+//        assertEquals(jsonDbMealTwo.getInt("cals"), mealTwo.getCals());
+//
+//        JSONArray ingredientsMealOne = jsonDbMealOne.getJSONArray("ingredients");
+//        JSONArray ingredientsMealTwo = jsonDbMealTwo.getJSONArray("ingredients");
+//        assertTrueJsonIngredientsList(ingredientsMealOne, mealOne.getIngredients());
+//        assertTrueJsonIngredientsList(ingredientsMealTwo, mealTwo.getIngredients());
+//    }
 
+    @Test
+    public void testToJson() {
+        toJsonTestHelper("logMeals");
+        toJsonTestHelper("dbMeals");
+    }
+
+    // MODIFIES: this
+    // EFFECTS: helper method to test toJson method
+    public void toJsonTestHelper(String jsonKey) {
+        addMultipleIngredients(mealOne, "Beef", "Salsa", "Cheese");
+        addMultipleIngredients(mealTwo, "Lettuce", "Tomatoes", "Blue Cheese");
+
+        today.addMealToLogAndDatabase(mealOne);
+        today.addMealToLogAndDatabase(mealTwo);
+        JSONObject jsonObj = today.toJson();
+
+        JSONArray jsonArray = jsonObj.getJSONArray(jsonKey);
+        JSONObject jsonMealOne = jsonArray.getJSONObject(0);
+        JSONObject jsonMealTwo = jsonArray.getJSONObject(1);
+
+        assertEquals(jsonMealOne.getString("name"), mealOne.getName());
+        assertEquals(jsonMealTwo.getString("name"), mealTwo.getName());
+        assertEquals(jsonMealOne.getInt("cals"), mealOne.getCals());
+        assertEquals(jsonMealTwo.getInt("cals"), mealTwo.getCals());
+
+        JSONArray ingredientsMealOne = jsonMealOne.getJSONArray("ingredients");
+        JSONArray ingredientsMealTwo = jsonMealTwo.getJSONArray("ingredients");
+        assertTrueJsonIngredientsList(ingredientsMealOne, mealOne.getIngredients());
+        assertTrueJsonIngredientsList(ingredientsMealTwo, mealTwo.getIngredients());
+    }
+
+    // EFFECTS: tests and asserts the JSON ARRAY contains the proper ingredients
+    public void assertTrueJsonIngredientsList(JSONArray jsonArray, List<String> ingredients) {
+        for (Object jsonIngredient: jsonArray) {
+            assertTrue(ingredients.contains(jsonIngredient.toString()));
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: adds multiple ingredients to a given meal, returns meal
+    public Meal addMultipleIngredients(Meal meal, String... ingredients) {
+        for (String ingredient: ingredients) {
+            meal.addIngredient(ingredient);
+        }
+        return meal;
+    }
 
     // MODIFIES: this
     // EFFECTS: gets the latest log calories value
@@ -231,4 +331,6 @@ public class LogTest {
 
         return (dayNumbers.contains(dayNum));
     }
+
+
 }

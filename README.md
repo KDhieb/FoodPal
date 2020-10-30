@@ -46,3 +46,7 @@ to this kind of solution.
 - As a user, I want to be able to view my total daily calories consumed
 - As a user, I want to be able to save my daily meal entries to file
 - As a user, I want to be able to load my daily meal entries from file
+
+## Sources Used
+- JSON Sample Application
+https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git

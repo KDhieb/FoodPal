@@ -88,9 +88,11 @@ public class Log implements Writable {
         return fullDate;
     }
 
+    // EFFECTS: converts meal data in log and database to JSON object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
+        json.put("date", getFullDate());
         json.put("logMeals", mealsToJson(todayMealLog));
         json.put("dbMeals", mealsToJson(mdbObject.getMealDatabase()));
         return json;
@@ -99,7 +101,7 @@ public class Log implements Writable {
     // EFFECTS: returns meals in the given list as a JSON array
     private JSONArray mealsToJson(List<Meal> mealList) {
         JSONArray jsonArray = new JSONArray();
-        for (Meal meal :  todayMealLog) {
+        for (Meal meal :  mealList) {
             jsonArray.put(meal.toJson());
         }
         return jsonArray;

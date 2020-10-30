@@ -1,10 +1,5 @@
 {
-  "logMeals" : [
-
-  ],
-  "dbMeals" : [
-
-  ],
-
-  "name": "Today's Meal Log"
+    "date": "FRIDAY OCTOBER 30",
+    "dbMeals": [],
+    "logMeals": []
 }

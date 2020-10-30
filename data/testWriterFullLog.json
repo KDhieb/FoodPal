@@ -1,63 +1,61 @@
 {
-  "logMeals": [
-    {
-      "name": "Spaghetti",
-      "cals": 420,
-      "ingredients": ["Meatballs", "Tomato Sauce", "Basil", "Cheese"]
-    },
-    {
-      "name": "Shrimp and Rice",
-      "cals": 250,
-      "ingredients": ["Shrimp", "Rice", "Sauce"]
-    },
-    {
-      "name": "Roasted Duck",
-      "cals": 240,
-      "ingredients": ["Duck", "Olive oil", "Potatoes"]
-    }
-  ],
-  "dbMeals": [
-    {
-      "name": "Chicken Burrito",
-      "cals": 350,
-      "ingredients": ["Chicken", "Tortilla", "Salsa", "Cheddar Cheese"]
-    },
-    {
-      "name": "Caesar Salad",
-      "cals": 220,
-      "ingredients": ["Croutons", "Lettuce", "Tomato", "Caesar Dressing"]
-    },
-    {
-      "name": "Roasted Lamb",
-      "cals": 400,
-      "ingredients": ["Lamb", "Olive Oil", "Spices", "Garlic Potatoes"]
-    },
-    {
-      "name": "Stuffed Peppers",
-      "cals": 360,
-      "ingredients": ["Bell Peppers", "Minced Meat", "Rice", "Tomato Sauce", "Cheese"]
-    },
-    {
-      "name": "Baked Tilapia",
-      "cals": 270,
-      "ingredients": ["Tilapia", "Spices", "Olive oil", "onions", "sundried tomatoes"]
-    },
-    {
-
-    "name": "Spaghetti",
-    "cals": 420,
-    "ingredients": ["Meatballs", "Tomato Sauce", "Basil", "Cheese"]
-    },
-    {
-      "name": "Shrimp and Rice",
-      "cals": 250,
-      "ingredients": ["Shrimp", "Rice", "Sauce"]
-    },
-    {
-      "name": "Roasted Duck",
-      "cals": 240,
-      "ingredients": ["Duck", "Olive oil", "Potatoes"]
-    }
-  ],
-  "name": "Today's Meal Log"
+    "date": "FRIDAY OCTOBER 30",
+    "dbMeals": [
+        {
+            "name": "Chicken Salad",
+            "ingredients": [
+                "Chicken",
+                "Lettuce",
+                "Caesar Dressing"
+            ],
+            "cals": 200
+        },
+        {
+            "name": "Beef Tacos",
+            "ingredients": [
+                "Beef",
+                "Taco Shell",
+                "Guacamole"
+            ],
+            "cals": 320
+        },
+        {
+            "name": "Pizza",
+            "ingredients": [
+                "Tomato Sauce",
+                "Cheese",
+                "Anchovies"
+            ],
+            "cals": 550
+        }
+    ],
+    "logMeals": [
+        {
+            "name": "Chicken Salad",
+            "ingredients": [
+                "Chicken",
+                "Lettuce",
+                "Caesar Dressing"
+            ],
+            "cals": 200
+        },
+        {
+            "name": "Beef Tacos",
+            "ingredients": [
+                "Beef",
+                "Taco Shell",
+                "Guacamole"
+            ],
+            "cals": 320
+        },
+        {
+            "name": "Pizza",
+            "ingredients": [
+                "Tomato Sauce",
+                "Cheese",
+                "Anchovies"
+            ],
+            "cals": 550
+        }
+    ]
 }

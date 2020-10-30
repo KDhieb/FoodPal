@@ -19,7 +19,6 @@ import java.util.Scanner;
 // Represents the user interface console
 public class TrackerApp {
     private static final String JSON_STORE = "./data/log.json";
-    private static final String JSON_STORE_TEST = "./data/testReaderFullLog.json";
     private Log today;
     private List<Meal> log;
     private MealDatabase mdbObject;
@@ -32,6 +31,7 @@ public class TrackerApp {
     public TrackerApp() {
         jsonReader = new JsonReader(JSON_STORE);
         jsonWriter = new JsonWriter(JSON_STORE);
+
         today = new Log();
         log = today.getMealLog();
         mdbObject = today.getMealDatabaseObject();
@@ -48,8 +48,6 @@ public class TrackerApp {
         boolean appRunning = true;
         String command;
 
-        initializeLog();
-
         while (appRunning) {
             displayMenu();
             command = input.next();
@@ -64,43 +62,34 @@ public class TrackerApp {
         System.out.println("\nHope to see you at your next meal!");
     }
 
-    // TODO : SPLIT COMMAND PROCESSING INTO MULTIPLE METHODS FOR CHECKSTYLE
     // MODIFIES: this
     // EFFECTS: processes user inputs in main menu
     private void processCommand(String command) {
-        switch (command) {
-            case "new":
-                doNewMeal();
-                break;
-            case "add":
-                doAddMealFromDatabase();
-                break;
-            case "del":
-                doDeleteMeal();
-                break;
-            case "cals":
-                doViewCals();
-                break;
-            case "log":
-                doViewMealLog();
-                break;
-            case "view":
-                doViewMealInDatabase();
-                break;
-            case "save":
-                doSaveLog();
-                break;
-            case "load":
-                doLoadLog();
-                break;
-            default:
-                System.out.println("Invalid Selection. Please try again.");
-                break;
+        if (command.equals("new")) {
+            doNewMeal();
+        } else if (command.equals("add")) {
+            doAddMealFromDatabase();
+        } else if (command.equals("del")) {
+            doDeleteMeal();
+        } else if (command.equals("cals")) {
+            doViewCals();
+        } else if (command.equals("log")) {
+            doViewMealLog();
+        } else if (command.equals("view")) {
+            doViewMealInDatabase();
+        } else if (command.equals("save")) {
+            doSaveLog();
+        } else if (command.equals("load")) {
+            doLoadLog();
+        } else {
+            System.out.println("Invalid Selection. Please try again.");
         }
     }
 
+
     // EFFECTS: displays main menu
     private void displayMenu() {
+        System.out.println("\n");
         System.out.println("\nWelcome to FoodPal! Please choose an option:");
         System.out.println("\t new -> create new meal");
         System.out.println("\t add -> add meal from database");
@@ -109,15 +98,15 @@ public class TrackerApp {
         System.out.println("\t log -> view today's food log");
         System.out.println("\tview -> view a meal in database");
         System.out.println("\tsave -> save log to file");
-        System.out.println("\tload -> load a log from file");
+        System.out.println("\tload -> load saved log from file");
         System.out.println("\tquit -> quit");
     }
 
-    // MODIFIES: this
-    // EFFECTS: initializes main objects
-    public void initializeLog() {
-        // nothing
-    }
+//    // MODIFIES: this
+//    // EFFECTS: initializes main objects
+//    public void initializeLog() {
+//        // nothing
+//    }
 
     // REQUIRES: calories entered must be >= 0
     // MODIFIES: this
@@ -236,6 +225,7 @@ public class TrackerApp {
         }
     }
 
+    // EFFECTS: saves the current log to file
     private void doSaveLog() {
         try {
             jsonWriter.open();
@@ -247,6 +237,8 @@ public class TrackerApp {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: loads log from file
     private void doLoadLog() {
         try {
             today = jsonReader.read();
