@@ -65,6 +65,20 @@ public class Log implements Writable {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: if meal index in range, removes meal and deducts calories, returns true
+    //          returns false if index not range
+    public Boolean removeMealFromLog(int index) {
+        if (!(index >= todayMealLog.size())) {
+            int mealCals = todayMealLog.get(index).getCals();
+            this.todayMealLog.remove(index);
+            totalCalories -= mealCals;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     // EFFECTS: returns true if meal log is empty, false otherwise
     public Boolean isLogEmpty() {
         return todayMealLog.isEmpty();

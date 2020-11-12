@@ -1,56 +1,45 @@
 {
-    "date": "FRIDAY OCTOBER 30",
+    "date": "THURSDAY NOVEMBER 5",
     "dbMeals": [
+        {
+            "name": "Chicken Salad",
+            "ingredients": [
+                "chicken",
+                "lettuce",
+                "ceasar dressing"
+            ],
+            "cals": 230
+        },
         {
             "name": "tacos",
             "ingredients": [
                 "beef",
-                "salsa",
+                "taco shell",
+                "sauce",
                 "cheese"
             ],
-            "cals": 120
-        },
-        {
-            "name": "chicken salad",
-            "ingredients": [
-                "chicken",
-                "lettuce",
-                "dressing"
-            ],
-            "cals": 200
-        },
-        {
-            "name": "Philly CheeseSteak",
-            "ingredients": [
-                "CheeseSteak",
-                "Cheese",
-                "Green Peppers",
-                "Onions",
-                "Mayo"
-            ],
-            "cals": 400
+            "cals": 350
         }
     ],
     "logMeals": [
         {
-            "name": "Philly CheeseSteak",
-            "ingredients": [
-                "CheeseSteak",
-                "Cheese",
-                "Green Peppers",
-                "Onions",
-                "Mayo"
-            ],
-            "cals": 400
-        },
-        {
-            "name": "chicken salad",
+            "name": "Chicken Salad",
             "ingredients": [
                 "chicken",
                 "lettuce",
-                "dressing"
+                "ceasar dressing"
             ],
-            "cals": 200
+            "cals": 230
+        },
+        {
+            "name": "tacos",
+            "ingredients": [
+                "beef",
+                "taco shell",
+                "sauce",
+                "cheese"
+            ],
+            "cals": 350
         }
     ]
 }
