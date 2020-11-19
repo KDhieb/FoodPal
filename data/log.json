@@ -1,45 +1,87 @@
 {
-    "date": "THURSDAY NOVEMBER 5",
+    "date": "THURSDAY NOVEMBER 19",
     "dbMeals": [
+        {
+            "name": "Spaghetti",
+            "ingredients": [
+                "spaghetti",
+                "tomato sauce",
+                "cheese"
+            ],
+            "cals": 450
+        },
+        {
+            "name": "Salmon",
+            "ingredients": [
+                "salmon",
+                "potatoes",
+                "olive oil"
+            ],
+            "cals": 350
+        },
+        {
+            "name": "Tacos",
+            "ingredients": [
+                "Beef",
+                "taco shell",
+                "cheese",
+                "salsa",
+                "tomatoes",
+                "onions",
+                "green peppers"
+            ],
+            "cals": 280
+        },
         {
             "name": "Chicken Salad",
             "ingredients": [
-                "chicken",
+                "Chicken",
                 "lettuce",
-                "ceasar dressing"
+                "caesar dressing"
             ],
-            "cals": 230
-        },
-        {
-            "name": "tacos",
-            "ingredients": [
-                "beef",
-                "taco shell",
-                "sauce",
-                "cheese"
-            ],
-            "cals": 350
+            "cals": 200
         }
     ],
     "logMeals": [
         {
-            "name": "Chicken Salad",
+            "name": "Spaghetti",
             "ingredients": [
-                "chicken",
-                "lettuce",
-                "ceasar dressing"
-            ],
-            "cals": 230
-        },
-        {
-            "name": "tacos",
-            "ingredients": [
-                "beef",
-                "taco shell",
-                "sauce",
+                "spaghetti",
+                "tomato sauce",
                 "cheese"
             ],
+            "cals": 450
+        },
+        {
+            "name": "Tacos",
+            "ingredients": [
+                "Beef",
+                "taco shell",
+                "cheese",
+                "salsa",
+                "tomatoes",
+                "onions",
+                "green peppers"
+            ],
+            "cals": 280
+        },
+        {
+            "name": "Salmon",
+            "ingredients": [
+                "salmon",
+                "potatoes",
+                "olive oil"
+            ],
             "cals": 350
+        },
+        {
+            "name": "Chicken Salad",
+            "ingredients": [
+                "Chicken",
+                "lettuce",
+                "caesar dressing"
+            ],
+            "cals": 200
         }
     ]
 }

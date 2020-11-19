@@ -5,8 +5,10 @@ import model.Meal;
 import javax.swing.*;
 import java.awt.*;
 
+// allows to override default cell renderer for a custom meal display
 public class MealCellRenderer extends DefaultListCellRenderer {
 
+    // EFFECTS: configures meal rendering for JList object based on Meal class
     @Override
     public Component getListCellRendererComponent(
             JList list, Object value, int index,

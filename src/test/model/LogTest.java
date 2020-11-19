@@ -163,6 +163,35 @@ public class LogTest {
     }
 
     @Test
+    public void testRemoveMealUsingIndex() {
+        today.addMealToLog(mealOne);
+        today.addMealToLog(mealTwo);
+
+        assertEquals(mealTwoCalories + mealOneCalories, today.getTotalCalories());
+        assertEquals(2, log.size());
+
+        assertTrue(today.removeMealFromLog(1));
+        assertEquals(1, log.size());
+        assertEquals(mealOneCalories, today.getTotalCalories());
+
+        assertTrue(today.removeMealFromLog(0));
+        assertEquals(0, log.size());
+        assertEquals(0, today.getTotalCalories());
+    }
+
+    @Test
+    public void testRemoveMealUsingIndexFail() {
+        today.addMealToLog(mealOne);
+        today.addMealToLog(mealTwo);
+        assertFalse(today.removeMealFromLog(2));
+        assertEquals(mealTwoCalories + mealOneCalories, today.getTotalCalories());
+        assertEquals(2, log.size());
+
+    }
+
+
+
+    @Test
     public void testIsLogEmpty() {
         assertTrue(today.isLogEmpty());
         assertEquals(0, log.size());
