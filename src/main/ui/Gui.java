@@ -22,22 +22,22 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-// represents graphical user interface
+// Represents graphical user interface
 public class Gui extends JFrame implements ListSelectionListener {
     private static final String JSON_STORE = "./data/log.json";
-    private static final int WIDTH = 900;
+    private static final int WIDTH = 700;
     private static final int HEIGHT = 500;
 
     private DefaultListModel<Meal> mealListModel;
     private DefaultListModel<String> ingredientListModel;
 
-    private JList<Meal> mealLog;
+    private JList<Meal> mealLogJList;
     private JLabel totalCalories;
 
     private JsonReader jsonReader;
     private JsonWriter jsonWriter;
     private Log log;
-    private ImageIcon mealIcon;
+    private ImageIcon mealImage;
 
     // EFFECTS: Create and set up the main application window.
     public Gui() {
@@ -53,7 +53,7 @@ public class Gui extends JFrame implements ListSelectionListener {
         pack();
         setVisible(true);
 
-        initializeLoadPrompt();
+        startLoadPrompt();
         exitSavePrompt();
     }
 
@@ -63,14 +63,15 @@ public class Gui extends JFrame implements ListSelectionListener {
         jsonReader = new JsonReader(JSON_STORE);
         jsonWriter = new JsonWriter(JSON_STORE);
         log = new Log();
-        mealIcon = new ImageIcon("./data/food1.jpg");
+        mealImage = new ImageIcon("./data/foodPicture.jpg");
         mealListModel = new DefaultListModel<>();
         ingredientListModel = new DefaultListModel<>();
     }
 
+    // CITATION: this method has been modeled from https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
     // MODIFIES: this
     // EFFECTS: initializes load prompt popup window on start
-    private void initializeLoadPrompt() {
+    private void startLoadPrompt() {
         int loadOption = JOptionPane.showConfirmDialog(null,
                 "Would you like to load your last log?", "Load File",
                 JOptionPane.YES_NO_OPTION);
@@ -84,6 +85,7 @@ public class Gui extends JFrame implements ListSelectionListener {
         }
     }
 
+    // CITATION: this method has been modeled from https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
     // EFFECTS: initializes save prompt popup window when quitting
     private void exitSavePrompt() {
         addWindowListener(new WindowAdapter() {
@@ -112,22 +114,36 @@ public class Gui extends JFrame implements ListSelectionListener {
         JPanel headerPane = new JPanel();
         headerPane.setLayout(new FlowLayout());
 
+        JPanel datePane = initializeDatePane();
+        JPanel caloriePane = initializeCaloriePane();
+
+        headerPane.add(datePane);
+        headerPane.add(Box.createHorizontalStrut(50));
+        headerPane.add(caloriePane);
+
+        add(headerPane, BorderLayout.PAGE_START);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: initializes date pane in header
+    private JPanel initializeDatePane() {
         JLabel date = new JLabel(log.getFullDate());
         JPanel datePane = new JPanel();
         datePane.add(date);
         datePane.setPreferredSize(new Dimension(300, 30));
         datePane.setBorder(BorderFactory.createLineBorder(Color.black));
+        return datePane;
+    }
 
+    // MODIFIES: this
+    // EFFECTS: initializes calorie pane in header
+    private JPanel initializeCaloriePane() {
         totalCalories = new JLabel("Total Calories: " + log.getTotalCalories());
         JPanel caloriePane = new JPanel();
         caloriePane.add(totalCalories);
         caloriePane.setPreferredSize(new Dimension(200, 30));
         caloriePane.setBorder(BorderFactory.createLineBorder(Color.black));
-
-        headerPane.add(datePane);
-        headerPane.add(Box.createHorizontalStrut(50));
-        headerPane.add(caloriePane);
-        add(headerPane, BorderLayout.PAGE_START);
+        return caloriePane;
     }
 
     // MODIFIES: this
@@ -135,7 +151,7 @@ public class Gui extends JFrame implements ListSelectionListener {
     private void initializeLog() {
         JSplitPane logPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
         logPane.setOneTouchExpandable(true);
-        logPane.setDividerLocation(600);
+        logPane.setDividerLocation(400);
 
         JScrollPane mealScrollPane = setupMealPane();
         JScrollPane ingredientScrollPane = setupIngredientPane();
@@ -160,21 +176,24 @@ public class Gui extends JFrame implements ListSelectionListener {
         JScrollPane ingredientScrollPane = new JScrollPane(ingredientWindow);
         ingredientScrollPane.createVerticalScrollBar();
         ingredientScrollPane.setHorizontalScrollBar(null);
+
         return ingredientScrollPane;
     }
 
     // MODIFIES: this
     // EFFECTS: setup configurations for meal pane
     private JScrollPane setupMealPane() {
-        mealLog = new JList<>(mealListModel);
-        mealLog.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        mealLog.setSelectedIndex(0);
-        mealLog.addListSelectionListener(this);
-        mealLog.setVisibleRowCount(10);
-        mealLog.setCellRenderer(new MealCellRenderer());
-        JScrollPane mealScrollPane = new JScrollPane(mealLog);
+        mealLogJList = new JList<>(mealListModel);
+        mealLogJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        mealLogJList.setSelectedIndex(0);
+        mealLogJList.addListSelectionListener(this);
+        mealLogJList.setVisibleRowCount(10);
+        mealLogJList.setCellRenderer(new MealCellRenderer());
+
+        JScrollPane mealScrollPane = new JScrollPane(mealLogJList);
         mealScrollPane.createVerticalScrollBar();
         mealScrollPane.setHorizontalScrollBar(null);
+
         return mealScrollPane;
     }
 
@@ -182,31 +201,24 @@ public class Gui extends JFrame implements ListSelectionListener {
     // EFFECTS: initializes buttons
     private void initializeButtons() {
         JPanel buttonPane = new JPanel();
-        //buttonPane.setLayout(new GridLayout(3,1));
         buttonPane.setLayout(new FlowLayout());
 
         JButton newMeal = new JButton("New Meal");
-        newMeal.setActionCommand("New Meal");
-        newMeal.addActionListener(new NewMealListener());
+        newMeal.setActionCommand("New");
+        newMeal.addActionListener(new ButtonListener());
 
         JButton addMeal = new JButton("Add Meal");
-        addMeal.setActionCommand("Add Meal");
-        addMeal.addActionListener(new AddMealListener());
+        addMeal.setActionCommand("Add");
+        addMeal.addActionListener(new ButtonListener());
 
         JButton deleteMeal = new JButton("Delete Meal");
-        deleteMeal.setActionCommand("Delete meal");
-        deleteMeal.addActionListener(new DeleteListener());
+        deleteMeal.setActionCommand("Delete");
+        deleteMeal.addActionListener(new ButtonListener());
 
         buttonPane.add(newMeal);
         buttonPane.add(addMeal);
         buttonPane.add(deleteMeal);
         add(buttonPane, BorderLayout.PAGE_END);
-    }
-
-    // EFFECTS: updates calories on screen from backend
-    private void updateCalories() {
-        int calories = log.getTotalCalories();
-        totalCalories.setText("Total Calories: " + calories);
     }
 
     // EFFECTS: updates meal and calories on screen from backend
@@ -219,10 +231,17 @@ public class Gui extends JFrame implements ListSelectionListener {
         updateCalories();
     }
 
+    // EFFECTS: updates calories on screen from backend
+    private void updateCalories() {
+        int calories = log.getTotalCalories();
+        totalCalories.setText("Total Calories: " + calories);
+    }
+
     // EFFECTS: updates ingredients window given currently selected list cell index
     private void updateIngredientsWindow(int index) {
         ingredientListModel.clear();
         if (index != -1) {
+            mealLogJList.setSelectedIndex(index);
             Meal meal = log.getMealLog().get(index);
             List<String> ingredients = meal.getIngredients();
             for (String ingredient : ingredients) {
@@ -231,21 +250,78 @@ public class Gui extends JFrame implements ListSelectionListener {
         }
     }
 
-    // Creates Action listener for new meal button
-    class NewMealListener implements ActionListener {
+    // MODIFIES: this
+    // EFFECTS: monitors selected meal index for change on mouse click and updates ingredients window
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+        if (e.getValueIsAdjusting()) {
+            int index = mealLogJList.getSelectedIndex();
+            updateIngredientsWindow(index);
+        }
+    }
+
+    // creates Action Listener for button presses
+    class ButtonListener implements ActionListener {
+
+        // EFFECTS: processes button clicks and runs appropriate methods
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            switch (e.getActionCommand()) {
+                case "Add":
+                    addMealAction();
+                    break;
+                case "New":
+                    newMealAction();
+                    break;
+                case "Delete":
+                    deleteMealAction();
+                    break;
+            }
+        }
+
+        // MODIFIES: this, log
+        // EFFECTS: creates popup window and interface for adding meals from database,
+        // adds meal to log if a meal was selected and updates screen
+        private void addMealAction() {
+            JPanel panel = new JPanel(new BorderLayout());
+            List<Meal> mealDB = log.getMealDatabaseObject().getMealDatabase();
+            String[] mealStringList = new String[mealDB.size()];
+            int pos = 0;
+            for (Meal meal: mealDB) {
+                String name = meal.getName();
+                int cals = meal.getCals();
+                mealStringList[pos] = String.format("%s  -  %d cals", name, cals);
+                pos++;
+            }
+
+            Object selectedMeal = JOptionPane.showInputDialog(panel,
+                    "Select a meal", "Add meal from database",
+                    JOptionPane.QUESTION_MESSAGE, mealImage,
+                    mealStringList, 1);
+
+            if (selectedMeal != null) {
+                String selectedMealValue = selectedMeal.toString();
+                int selectedMealIndex = Arrays.asList(mealStringList).indexOf(selectedMealValue);
+                Meal meal = mealDB.get(selectedMealIndex);
+                log.addMealToLog(meal);
+                updateMeals();
+                updateIngredientsWindow(mealListModel.size() - 1);
+            }
+        }
+
 
         // MODIFIES: this, log
         // EFFECTS: creates popup window and interface for new meal creation,
         // adds meal to log and database if a meal was created and updates screen
-        @Override
-        public void actionPerformed(ActionEvent e) {
+        private void newMealAction() {
             NewMealWindow newMealWindow = new NewMealWindow();
             JPanel panel = newMealWindow.returnJPanel();
 
             int optionPaneValue = JOptionPane.showConfirmDialog(
                     null, panel,
                     "Create New Meal",
-                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, mealIcon);
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, mealImage);
 
             if (optionPaneValue == JOptionPane.OK_OPTION) {
                 String mealName = newMealWindow.getMealName();
@@ -260,74 +336,21 @@ public class Gui extends JFrame implements ListSelectionListener {
                 log.addMealToLogAndDatabase(newMeal);
                 updateMeals();
                 int index = mealListModel.indexOf(newMeal);
-                mealLog.setSelectedIndex(index);
                 updateIngredientsWindow(index);
             }
         }
-    }
-
-    // Creates Action listener for add meal button
-    class AddMealListener implements ActionListener {
-
-        // MODIFIES: this, log
-        // EFFECTS: creates popup window and interface for adding meals from database,
-        // adds meal to log if a meal was selected and updates screen
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            JPanel panel = new JPanel(new BorderLayout());
-            List<Meal> mealDB = log.getMealDatabaseObject().getMealDatabase();
-            String[] mealStringList = new String[mealDB.size()];
-            int pos = 0;
-            for (Meal meal: mealDB) {
-                String name = meal.getName();
-                int cals = meal.getCals();
-                mealStringList[pos] = String.format("%s  -  %d cals", name, cals);
-                pos++;
-            }
-
-            Object selectedMeal = JOptionPane.showInputDialog(panel,
-                    "Select a meal", "Add meal from database",
-                    JOptionPane.QUESTION_MESSAGE, mealIcon,
-                    mealStringList, 1);
-
-            if (selectedMeal != null) {
-                String selectedMealValue = selectedMeal.toString();
-                int selectedMealIndex = Arrays.asList(mealStringList).indexOf(selectedMealValue);
-                Meal meal = mealDB.get(selectedMealIndex);
-                log.addMealToLog(meal);
-                updateMeals();
-            }
-        }
-
-
-    }
-
-    // Creates Action listener for delete meal button
-    class DeleteListener implements ActionListener {
 
         // MODIFIES: this, log
         // EFFECTS: Deletes a selected meal from log and updates screen
-        @Override
-        public void actionPerformed(ActionEvent e) {
+        private void deleteMealAction() {
             try {
-                int index = mealLog.getSelectedIndex();
+                int index = mealLogJList.getSelectedIndex();
                 log.removeMealFromLog(index);
                 updateMeals();
-                index = mealLog.getSelectedIndex();
-                updateIngredientsWindow(index);
+                updateIngredientsWindow(-1);
             } catch (ArrayIndexOutOfBoundsException exception) {
-                // Do nothing
+                // catch and do nothing
             }
-        }
-    }
-
-    // MODIFIES: this
-    // EFFECTS: monitors selected meal index for change on mouse click and updates ingredients window
-    @Override
-    public void valueChanged(ListSelectionEvent e) {
-        if (e.getValueIsAdjusting()) {
-            int index = mealLog.getSelectedIndex();
-            updateIngredientsWindow(index);
         }
     }
 }

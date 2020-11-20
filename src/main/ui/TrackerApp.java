@@ -100,12 +100,6 @@ public class TrackerApp {
         System.out.println("\tquit -> quit");
     }
 
-//    // MODIFIES: this
-//    // EFFECTS: initializes main objects
-//    public void initializeLog() {
-//        // nothing
-//    }
-
     // REQUIRES: calories entered must be >= 0
     // MODIFIES: this
     // EFFECTS: creates a new meal and adds it to today's meal log

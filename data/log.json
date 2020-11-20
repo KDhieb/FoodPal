@@ -1,5 +1,5 @@
 {
-    "date": "THURSDAY NOVEMBER 19",
+    "date": "FRIDAY NOVEMBER 20",
     "dbMeals": [
         {
             "name": "Spaghetti",
@@ -40,6 +40,16 @@
                 "caesar dressing"
             ],
             "cals": 200
+        },
+        {
+            "name": "Chicken and Broccoli",
+            "ingredients": [
+                "Chicken",
+                "rice",
+                "broccoli",
+                "honey mustard"
+            ],
+            "cals": 230
         }
     ],
     "logMeals": [
@@ -82,6 +92,25 @@
                 "caesar dressing"
             ],
             "cals": 200
+        },
+        {
+            "name": "Salmon",
+            "ingredients": [
+                "salmon",
+                "potatoes",
+                "olive oil"
+            ],
+            "cals": 350
+        },
+        {
+            "name": "Chicken and Broccoli",
+            "ingredients": [
+                "Chicken",
+                "rice",
+                "broccoli",
+                "honey mustard"
+            ],
+            "cals": 230
         }
     ]
 }
