@@ -1,5 +1,6 @@
 package persistence;
 
+import exceptions.InvalidInputException;
 import model.Log;
 import model.Meal;
 import model.MealDatabase;
@@ -20,7 +21,7 @@ public class JsonReaderTest extends JsonTest {
         try {
             Log log = reader.read();
             fail("IOException expected");
-        } catch (IOException e) {
+        } catch (IOException | InvalidInputException e) {
             // expected
         }
     }
@@ -35,7 +36,7 @@ public class JsonReaderTest extends JsonTest {
             assertEquals(0, log.getTotalCalories());
             assertEquals(0, log.getMealLog().size());
             assertTrue(log.isLogEmpty());
-        } catch (IOException e) {
+        } catch (IOException | InvalidInputException e) {
             fail("Failed to read from file when testing empty log");
         }
     }
@@ -67,7 +68,7 @@ public class JsonReaderTest extends JsonTest {
             checkMealTest("Stuffed Peppers", 360, mealFourIngredients, dbMeals.get(3));
             checkMealTest("Baked Tilapia", 270, mealFiveIngredients, dbMeals.get(4));
 
-        } catch (IOException e) {
+        } catch (IOException | InvalidInputException e) {
             fail("Failed to read from file when testing full log");
         }
     }

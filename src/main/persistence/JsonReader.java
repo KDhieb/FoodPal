@@ -1,5 +1,6 @@
 package persistence;
 
+import exceptions.InvalidInputException;
 import model.Log;
 import model.Meal;
 
@@ -23,7 +24,7 @@ public class JsonReader {
 
     // EFFECTS: reads Log from file and returns it
     // throws IOException if an error occurs reading data from file
-    public Log read() throws IOException {
+    public Log read() throws IOException, InvalidInputException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseLog(jsonObject);
@@ -40,7 +41,7 @@ public class JsonReader {
     }
 
     // parses log from JSON object and returns in
-    private Log parseLog(JSONObject jsonObject) {
+    private Log parseLog(JSONObject jsonObject) throws InvalidInputException {
         Log log = new Log();
         addMeals(log, jsonObject);
         return log;
@@ -48,25 +49,27 @@ public class JsonReader {
 
     // MODIFIES: log
     // EFFECTS: parses meals from JSON object and adds them to log
-    private void addMeals(Log log, JSONObject jsonObject) {
+    private void addMeals(Log log, JSONObject jsonObject) throws InvalidInputException {
         JSONArray jsonArrayLog = jsonObject.getJSONArray("logMeals");
         JSONArray jsonArrayDB = jsonObject.getJSONArray("dbMeals");
         for (Object json : jsonArrayLog) {
             JSONObject nextMeal = (JSONObject) json;
-            Meal meal = returnJsonMeal(nextMeal);
+            Meal meal = null;
+            meal = returnJsonMeal(nextMeal);
             log.addMealToLog(meal);
         }
 
         for (Object json: jsonArrayDB) {
             JSONObject nextMeal = (JSONObject) json;
-            Meal meal = returnJsonMeal(nextMeal);
+            Meal meal = null;
+            meal = returnJsonMeal(nextMeal);
             log.storeMealInDatabase(meal);
         }
 
     }
 
     // EFFECTS: parses meal from JSON object and returns it
-    private Meal returnJsonMeal(JSONObject jsonObject) {
+    private Meal returnJsonMeal(JSONObject jsonObject) throws InvalidInputException {
         String name = jsonObject.getString("name");
         int cals = jsonObject.getInt("cals");
         JSONArray ingredients = jsonObject.getJSONArray("ingredients");

@@ -1,6 +1,7 @@
 package ui;
 
 
+import exceptions.InvalidInputException;
 import model.Log;
 import model.MealDatabase;
 import model.Meal;
@@ -27,7 +28,7 @@ public class TrackerApp {
     private JsonWriter jsonWriter;
 
     //EFFECTS: begins the ui console
-    public TrackerApp() {
+    public TrackerApp() throws InvalidInputException {
         jsonReader = new JsonReader(JSON_STORE);
         jsonWriter = new JsonWriter(JSON_STORE);
 
@@ -43,7 +44,7 @@ public class TrackerApp {
 
     // MODIFIES: this
     // EFFECTS: keeps application running and allows for user input
-    private void runTracker() {
+    private void runTracker() throws InvalidInputException {
         boolean appRunning = true;
         String command;
 
@@ -63,7 +64,7 @@ public class TrackerApp {
 
     // MODIFIES: this
     // EFFECTS: processes user inputs in main menu
-    private void processCommand(String command) {
+    private void processCommand(String command) throws InvalidInputException {
         if (command.equals("new")) {
             doNewMeal();
         } else if (command.equals("add")) {
@@ -103,7 +104,7 @@ public class TrackerApp {
     // REQUIRES: calories entered must be >= 0
     // MODIFIES: this
     // EFFECTS: creates a new meal and adds it to today's meal log
-    public void doNewMeal() {
+    public void doNewMeal() throws InvalidInputException {
         System.out.println("Enter Meal Name:");
         input.nextLine();
         String name = input.nextLine();
@@ -242,7 +243,7 @@ public class TrackerApp {
 
             System.out.println("Log successfully loaded from file!");
 
-        } catch (IOException e) {
+        } catch (IOException | InvalidInputException e) {
             System.out.println("Unable to read from file " + JSON_STORE);
         }
     }

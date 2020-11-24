@@ -1,5 +1,6 @@
 package ui;
 
+import exceptions.InvalidInputException;
 import model.Log;
 import model.Meal;
 
@@ -79,7 +80,7 @@ public class Gui extends JFrame implements ListSelectionListener {
             try {
                 log = jsonReader.read();
                 updateMeals();
-            } catch (IOException e) {
+            } catch (IOException | InvalidInputException e) {
                 System.out.println("Unable to read from file " + JSON_STORE);
             }
         }
@@ -109,7 +110,7 @@ public class Gui extends JFrame implements ListSelectionListener {
     }
 
     // MODIFIES: this
-    // EFFECTS: initializes header pane for data and calories
+    // EFFECTS: initializes header pane for date and calories
     private void initializeHeader() {
         JPanel headerPane = new JPanel();
         headerPane.setLayout(new FlowLayout());
@@ -266,7 +267,6 @@ public class Gui extends JFrame implements ListSelectionListener {
         // EFFECTS: processes button clicks and runs appropriate methods
         @Override
         public void actionPerformed(ActionEvent e) {
-
             switch (e.getActionCommand()) {
                 case "Add":
                     addMealAction();
@@ -324,19 +324,23 @@ public class Gui extends JFrame implements ListSelectionListener {
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, mealImage);
 
             if (optionPaneValue == JOptionPane.OK_OPTION) {
-                String mealName = newMealWindow.getMealName();
-                int calories = newMealWindow.getCalories();
-                Meal newMeal = new Meal(mealName, calories);
-                List<String> ingredients = newMealWindow.parseAndReturnIngredientList();
+                try {
+                    String mealName = newMealWindow.getMealName();
+                    int calories = newMealWindow.getCalories();
+                    Meal newMeal = new Meal(mealName, calories);
+                    List<String> ingredients = newMealWindow.parseAndReturnIngredientList();
 
-                for (String ingredient : ingredients) {
-                    newMeal.addIngredient(ingredient.trim());
+                    for (String ingredient : ingredients) {
+                        newMeal.addIngredient(ingredient.trim());
+                    }
+
+                    log.addMealToLogAndDatabase(newMeal);
+                    updateMeals();
+                    int index = mealListModel.indexOf(newMeal);
+                    updateIngredientsWindow(index);
+                } catch (InvalidInputException e) {
+                    System.out.println("Invalid input! Calories can't be negative.");
                 }
-
-                log.addMealToLogAndDatabase(newMeal);
-                updateMeals();
-                int index = mealListModel.indexOf(newMeal);
-                updateIngredientsWindow(index);
             }
         }
 

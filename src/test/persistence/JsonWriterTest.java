@@ -1,5 +1,6 @@
 package persistence;
 
+import exceptions.InvalidInputException;
 import model.Log;
 import model.Meal;
 import model.MealDatabase;
@@ -18,7 +19,7 @@ public class JsonWriterTest extends JsonTest {
     Meal mealThree;
 
     @BeforeEach
-    public void setup() {
+    public void setup() throws InvalidInputException {
         mealOne = new Meal("Chicken Salad", 200);
         mealOne.addIngredient("Chicken");
         mealOne.addIngredient("Lettuce");
@@ -63,7 +64,7 @@ public class JsonWriterTest extends JsonTest {
             assertEquals(0, log.getMealLog().size());
             MealDatabase mdbObject = log.getMealDatabaseObject();
             assertEquals(0, mdbObject.getMealDatabase().size());
-        } catch (IOException e) {
+        } catch (IOException | InvalidInputException e) {
             fail("IOException thrown, no exception expected");
         }
     }
@@ -97,7 +98,7 @@ public class JsonWriterTest extends JsonTest {
             checkMealTest("Beef Tacos", 320, mealTwo.getIngredients(), meals.get(1), dbMeals.get(1));
             checkMealTest("Pizza", 550, mealThree.getIngredients(), meals.get(2), dbMeals.get(2));
 
-        } catch (IOException e) {
+        } catch (IOException | InvalidInputException e) {
             fail("IOException thrown, no exception expected");
         }
     }

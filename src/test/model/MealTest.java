@@ -1,5 +1,6 @@
 package model;
 
+import exceptions.InvalidInputException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +14,7 @@ public class MealTest {
     private Meal mealTwo;
 
     @BeforeEach
-    public void runBefore() {
+    public void runBefore() throws InvalidInputException {
         mealOne = new Meal("Burrito", 350);
         mealTwo = new Meal("Pizza", 500);
     }
@@ -39,7 +40,7 @@ public class MealTest {
     }
 
     @Test
-    public void testEqualsAndHashCode() {
+    public void testEqualsAndHashCode() throws InvalidInputException {
         String mealOneName = mealOne.getName();
         int mealOneCals = mealOne.getCals();
         Meal mealOneCopy = new Meal(mealOneName, mealOneCals);
@@ -68,7 +69,7 @@ public class MealTest {
     }
 
     @Test
-    public void testEqualsAlmostEquals() {
+    public void testEqualsAlmostEquals() throws InvalidInputException {
         String name = mealOne.getName();
         int cals = mealOne.getCals();
         String ingredient = "Extra Cheese";

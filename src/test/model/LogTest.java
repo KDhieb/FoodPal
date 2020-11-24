@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import exceptions.InvalidInputException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LogTest {
@@ -23,7 +25,7 @@ public class LogTest {
     List<Meal> log;
 
     @BeforeEach
-    public void runBefore() {
+    public void runBefore() throws InvalidInputException {
         today = new Log();
         mealOne = new Meal("Burrito", 350);
         mealTwo = new Meal("Salad", 200);

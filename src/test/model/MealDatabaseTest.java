@@ -1,5 +1,6 @@
 package model;
 
+import exceptions.InvalidInputException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,11 +15,30 @@ public class MealDatabaseTest {
     Meal mealTwo;
 
     @BeforeEach
-    public void runBefore() {
+    public void runBefore() throws InvalidInputException {
         today = new Log();
         mdbObject = today.getMealDatabaseObject();
         mealOne = new Meal("Burrito", 350);
         mealTwo = new Meal("Salad", 200);
+    }
+
+    @Test
+    public void testConstructorSuccess() {
+        try {
+            Meal testMeal = new Meal("TestMeal", 0);
+        } catch (InvalidInputException e) {
+            fail("No Exception Expected");
+        }
+    }
+
+    @Test
+    public void testConstructorNegativeCalories() {
+        try {
+            Meal testMeal = new Meal("TestMeal", -1);
+            fail("InvalidMealInputException expected!");
+        } catch (InvalidInputException e) {
+            // expected
+        }
     }
 
     @Test

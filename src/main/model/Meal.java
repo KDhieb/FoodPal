@@ -1,5 +1,6 @@
 package model;
 
+import exceptions.InvalidInputException;
 import org.json.JSONObject;
 import persistence.Writable;
 
@@ -14,10 +15,14 @@ public class Meal implements Writable {
     private List<String> ingredients;
 
     // EFFECTS: creates basic meal entry with name and calories
-    public Meal(String name, Integer cals) {
-        this.name = name;
-        this.cals = cals;
-        this.ingredients = new ArrayList<>();
+    public Meal(String name, Integer cals) throws InvalidInputException {
+        if (cals < 0) {
+            throw new InvalidInputException("Invalid meal input!");
+        } else {
+            this.name = name;
+            this.cals = cals;
+            this.ingredients = new ArrayList<>();
+        }
     }
 
     // EFFECTS: overrides equals method to compare different meal objects with the exact same information
