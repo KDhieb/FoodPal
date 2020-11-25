@@ -338,8 +338,8 @@ public class Gui extends JFrame implements ListSelectionListener {
                     updateMeals();
                     int index = mealListModel.indexOf(newMeal);
                     updateIngredientsWindow(index);
-                } catch (InvalidInputException e) {
-                    System.out.println("Invalid input! Calories can't be negative.");
+                } catch (InvalidInputException | NumberFormatException e) {
+                    System.out.println("Invalid input!");
                 }
             }
         }

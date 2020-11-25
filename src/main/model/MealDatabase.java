@@ -5,7 +5,7 @@ import java.util.List;
 
 // Represents the collection of all meals created and stored for future use
 public class MealDatabase {
-    private List<Meal> mealDatabase;
+    private final List<Meal> mealDatabase;
 
      //EFFECTS: creates meal database to store and retrieve meals
     public MealDatabase() {

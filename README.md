@@ -53,3 +53,22 @@ to this kind of solution.
 - Class involved: Meal Class
 - Method Involved: Meal Constructor (throws InvalidInputException)
 
+
+## Phase 4: Task 3
+
+Reflection on refactoring to improve project design:
+
+- Refactor code to reduce coupling between Log and MealDatabase with 
+ the Meal class
+
+- Split my ActionListener class within my Gui class into individual
+ ActionListener classes for each button to prevent overwhelming the 
+ class with if/else statements while keeping control of each button separate
+ 
+- Implement an abstract class (such as a generic meal log class) for Log and MealDatabase 
+to extend such that common functionality can be shared while eliminating repeated code
+ 
+ - Reduce dependencies of Gui class (i.e., MealCellRenderer or NewMealWindow)
+by refactoring class and making all features self-contained
+
+

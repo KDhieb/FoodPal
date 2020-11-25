@@ -15,8 +15,9 @@ public class Meal implements Writable {
     private List<String> ingredients;
 
     // EFFECTS: creates basic meal entry with name and calories
+    // if calories negative or name empty, throws exception
     public Meal(String name, Integer cals) throws InvalidInputException {
-        if (cals < 0) {
+        if (cals < 0 || name.isEmpty()) {
             throw new InvalidInputException("Invalid meal input!");
         } else {
             this.name = name;

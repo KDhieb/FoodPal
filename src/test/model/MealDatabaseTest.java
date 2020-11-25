@@ -23,25 +23,6 @@ public class MealDatabaseTest {
     }
 
     @Test
-    public void testConstructorSuccess() {
-        try {
-            Meal testMeal = new Meal("TestMeal", 0);
-        } catch (InvalidInputException e) {
-            fail("No Exception Expected");
-        }
-    }
-
-    @Test
-    public void testConstructorNegativeCalories() {
-        try {
-            Meal testMeal = new Meal("TestMeal", -1);
-            fail("InvalidMealInputException expected!");
-        } catch (InvalidInputException e) {
-            // expected
-        }
-    }
-
-    @Test
     public void testStoreEntry(){
         List<Meal> mealDatabase = mdbObject.getMealDatabase();
 

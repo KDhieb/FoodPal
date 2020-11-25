@@ -20,6 +20,44 @@ public class MealTest {
     }
 
     @Test
+    public void testConstructorSuccess() {
+        try {
+            Meal testMeal = new Meal("TestMeal", 50);
+        } catch (InvalidInputException e) {
+            fail("No Exception Expected");
+        }
+    }
+
+    @Test
+    public void testConstructorMinimumSuccess() {
+        try {
+            Meal testMeal = new Meal("a", 0);
+        } catch (InvalidInputException e) {
+            fail("No Exception Expected");
+        }
+    }
+
+    @Test
+    public void testConstructorNegativeCalories() {
+        try {
+            Meal testMeal = new Meal("TestMeal", -1);
+            fail("InvalidMealInputException expected!");
+        } catch (InvalidInputException e) {
+            // expected
+        }
+    }
+
+    @Test
+    public void testConstructorEmptyName() {
+        try {
+            Meal testMeal = new Meal("", 100);
+            fail("InvalidMealInputException expected!");
+        } catch (InvalidInputException e) {
+            // expected
+        }
+    }
+
+    @Test
     public void testAddIngredients() {
         List<String> ingredients = mealOne.getIngredients();
         mealOne.addIngredient("Beef");
