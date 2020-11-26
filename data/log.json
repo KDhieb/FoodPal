@@ -1,5 +1,5 @@
 {
-    "date": "FRIDAY NOVEMBER 20",
+    "date": "WEDNESDAY NOVEMBER 25",
     "dbMeals": [
         {
             "name": "Spaghetti",
@@ -111,6 +111,15 @@
                 "honey mustard"
             ],
             "cals": 230
+        },
+        {
+            "name": "Spaghetti",
+            "ingredients": [
+                "spaghetti",
+                "tomato sauce",
+                "cheese"
+            ],
+            "cals": 450
         }
     ]
 }
