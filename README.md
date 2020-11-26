@@ -71,7 +71,5 @@ to extend such that common functionality can be shared while eliminating repeate
  - Reduce dependencies of Gui class (i.e., MealCellRenderer or NewMealWindow)
 by refactoring class and making all features self-contained
 
-- Further adhere to Single Responsibility principle by refactoring code and extracting
- helper methods to ensure that all methods are in compliance 
 
 
